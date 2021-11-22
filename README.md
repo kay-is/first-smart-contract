@@ -1,1 +1,0 @@
-# first-smart-contract
