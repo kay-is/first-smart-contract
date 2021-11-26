@@ -8,3 +8,7 @@ hoscdev
 #Hardhat files
 cache
 artifacts
+
+#Client files
+client/dist/bundle.js
+client/src/contracts/*.json

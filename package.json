@@ -4,12 +4,11 @@
     "node": ">=14.0.0"
   },
   "scripts": {
-    "compile:contracts": "hardhat compile && npm run copy:abis",
-    "copy:abis": "node scripts/copy-contract-abis.js",
-    "test": "npm run compile:contracts && hardhat test",
+    "test": "npm run build:contracts && hardhat test",
+    "build:contracts": "hardhat compile",
     "start:network": "hardhat node",
-    "deploy:localhost": "hardhat --network localhost run scripts/deploy.ts && npm run copy:abis",
-    "start:client": "http-server client -c-1"
+    "deploy:localhost": "hardhat --network localhost run scripts/deploy.ts",
+    "start:client": "cd client && npm run build && npm start"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
@@ -44,8 +43,5 @@
     "ts-node": "^10.3.0",
     "typechain": "^5.2.0",
     "typescript": "^4.4.4"
-  },
-  "dependencies": {
-    "http-server": "^14.0.0"
   }
 }
