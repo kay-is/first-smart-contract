@@ -11,4 +11,5 @@ artifacts
 
 #Client files
 client/dist/bundle.js
+client/dist/bundle.js.map
 client/src/contracts/*.json
