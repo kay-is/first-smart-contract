@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<title>Test Ethereum Connection</title>
+
+<button id="create">Create Fundraiser</button>
+
+<script type="module">
+  import { ethers } from "https://unpkg.com/ethers@5.5.1/dist/ethers.esm.js"
+
+  const address = "0xa9526dfdd289b2c2ada83e07c6dd293aa2c5fee9"
+  const abi = [
+    "function createFundraiser(string memory name, string memory url, string memory imageUrl, string memory description, address payable beneficiary) public",
+    "function fundraisersCount() public view returns (uint256)",
+    "function fundraisers(uint256 limit, uint256 offset) public view returns (Fundraiser[] memory selection)",
+  ]
+
+  async function loadFundraisers() {
+    const provider = new ethers.providers.JsonRpcProvider()
+    const contract = new ethers.Contract(address, abi, provider)
+
+    const fundraisersCount = await contract.fundraisersCount()
+
+    const result = []
+    if (fundraisersCount.toNumber() > 0)
+      result = await contract.fundraisers(10, 0)
+
+    console.log(result)
+  }
+
+  document.getElementById("create").addEventListener("click", async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    await provider.send("eth_requestAccounts", [])
+    const contract = new ethers.Contract(address, abi, provider.getSigner())
+    await contract.createFundraiser(
+      "Fundraiser " + Math.random(),
+      "https://example.com",
+      "https://example.com/cover.jpg",
+      "This is my fundraiser.",
+      "0x70997970c51812dc3a010c7d01b50e0d17dc79c8"
+    )
+
+    loadFundraisers()
+  })
+
+  loadFundraisers()
+</script>

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "http-server ./dist -c-1",
+    "watch": "chokidar \"./src/**/*.js\" -c \"npm run build\"",
     "build": "esbuild --bundle --minify --sourcemap ./src/index.js --outfile=dist/bundle.js"
   },
   "keywords": [
@@ -16,10 +17,13 @@
   "license": "ISC",
   "dependencies": {
     "ethers": "^5.5.1",
+    "history": "^5.1.0",
     "htm": "^3.1.0",
-    "preact": "^10.6.1"
+    "preact": "^10.6.1",
+    "preact-router": "^3.2.1"
   },
   "devDependencies": {
+    "chokidar-cli": "^3.0.0",
     "esbuild": "^0.13.15",
     "http-server": "^14.0.0"
   }

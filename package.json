@@ -5,10 +5,11 @@
   },
   "scripts": {
     "test": "npm run build:contracts && hardhat test",
-    "build:contracts": "hardhat compile",
-    "start:network": "hardhat node",
-    "deploy:localhost": "hardhat --network localhost run scripts/deploy.ts",
-    "start:client": "cd client && npm run build && npm start"
+    "test:localhost": "npm run build:contracts && hardhat --network localhost test",
+    "build": "hardhat compile",
+    "node": "hardhat node",
+    "deploy": "hardhat --network localhost run scripts/deploy.ts",
+    "client": "cd client && npm run build && npm start"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
@@ -43,5 +44,6 @@
     "ts-node": "^10.3.0",
     "typechain": "^5.2.0",
     "typescript": "^4.4.4"
-  }
+  },
+  "dependencies": {}
 }
